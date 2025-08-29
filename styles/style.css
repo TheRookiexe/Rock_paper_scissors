@@ -3,18 +3,45 @@ body{
     font-family: 'Courier New', sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content:center;
+    justify-content:start;
     padding: 0px;
+    margin: 0px;
 }
 
 .header {
-    height: 130px;
+    height: 120px;
     background-color: #333446;
     color: white;
-    font-size: 65px;
+    font-size: 60px;
     text-align: center;
-    padding: 50px;
+    padding: 40px;
     font-weight: bold;
     font-family: 'Public Pixel', sans-serif;
                                                 
+}
+
+button {
+    font-family: 'Public Pixel', sans-serif;
+    height: 100px;
+    width: 280px;
+    font-size: 30px;
+    text-align: center;
+    border-radius: 5px;
+    border: #333446 solid 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+button:hover{
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+button:active{
+    transform: scale(0.98);
+}
+
+.buttons {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
 }
