@@ -45,3 +45,32 @@ button:active{
     justify-content: center;
     gap: 80px;
 }
+
+.scores {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 60px;
+}
+
+.score {
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 28px;
+    background-color: #333446;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 8px;
+    border: 4px solid #1f1f2e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.result-message {
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Public Pixel', sans-serif;
+    font-size: 28px;
+    color: #f0f0f0;
+    text-shadow: 1px 1px 3px #000000aa;
+    min-height: 40px;  /* Keeps space even if no message */
+    user-select: none;
+}

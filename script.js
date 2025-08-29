@@ -1,77 +1,93 @@
+const buttons = document.querySelectorAll('.rps-btn');
+const playerScoreDiv = document.getElementById('player-score');
+const computerScoreDiv = document.getElementById('computer-score');
+
+const resultDiv = document.createElement('div');
+resultDiv.className = 'result-message';
+document.querySelector('.body').appendChild(resultDiv);
+
 function getComputerChoice(){
     const comp_choice=["rock", "paper", "scissors"];
     return comp_choice[Math.floor(Math.random()*comp_choice.length)];
 }
 // console.log(getComputerChoice())
 
-function getHumanChoice(){
-    let users_Choice=prompt("Enter your choice (Rock, Paper, Scissors): ").toLowerCase();
-    return users_Choice;
-}
+// function getHumanChoice(){
+//     let users_Choice=prompt("Enter your choice (Rock, Paper, Scissors): ").toLowerCase();
+//     return users_Choice;
+// }
 // console.log(getHumanChoice())
 
 let humanScore=0;
 let computerScore=0;
+let roundsPlayed = 0;
+const maxRounds = 5;
+
 
 function playRound(ComputerChoice, HumanChoice){
     switch (HumanChoice) {
         case 'rock':
             if(ComputerChoice=='rock'){
-                console.log("It's a tie!");
+                resultDiv.textContent ="It's a tie!";
             }else if(ComputerChoice=='paper'){
-                console.log('You Lose! Paper Beats Rock');
+                resultDiv.textContent ='You Lose! Paper Beats Rock';
                 return computerScore++;
             }else{
-                console.log('You win! Rock Beats Scissors.');
+                resultDiv.textContent ='You win! Rock Beats Scissors.';
                 return humanScore++;
             }
             break;
         case 'paper':
             if (ComputerChoice=="paper"){
-                console.log("It's a tie.");
+                resultDiv.textContent ="It's a tie.";
             }else if(ComputerChoice=="scissors"){
-                console.log("You Lose! Scissors Beats Paper.");
+                resultDiv.textContent ="You Lose! Scissors Beats Paper.";
                 return computerScore++;
             }else{
-                console.log("You win! Paper Beats Rock.");
+                resultDiv.textContent ="You win! Paper Beats Rock.";
                 return humanScore++;
             }
             break;
         case 'scissors':
             if (ComputerChoice=="scissors"){
-                console.log("It's a tie.")
+                resultDiv.textContent ="It's a tie.";
             }else if(ComputerChoice=="rock"){
-                console.log("You Lose! Rock Beats Scissors.")
+                resultDiv.textContent ="You Lose! Rock Beats Scissors.";
                 return computerScore++;
             }else{
-                console.log("You win! Scissors beats Paper.")
+                resultDiv.textContent ="You win! Scissors beats Paper.";
                 return humanScore++;
             }
             break;
         default:
-            console.log("Invalid Input. Please Enter Rock, Paper or Scissors.")
+            resultDiv.textContent ="Invalid Input. Please Enter Rock, Paper or Scissors.";
             break;
     }
 }
 
 
-function playRounds(round){
-    while(round<5){
-    const ComputerChoice=getComputerChoice();
-    const HumanChoice=getHumanChoice(); 
-    playRound(ComputerChoice,HumanChoice);
-    console.log(`Your Score: ${humanScore} | Computer Score: ${computerScore}`);
-    round++
-    }
-    console.log('------------------------game Over-----------------------------')
-    if (humanScore>computerScore){
-        console.log(`You won! Your Score: ${humanScore} | Computer Score: ${computerScore}`)
-    }else if (computerScore>humanScore){
-        console.log(`You Lost! Your Score: ${humanScore} | Computer Score: ${computerScore}`)
-    }else{
-        console.log(`It's a tie!`)
-    }
-}
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    if (roundsPlayed >= maxRounds) return; // Stop accepting input after 5 rounds
 
-playRounds(0)
+    const HumanChoice = button.dataset.choice;
+    const ComputerChoice = getComputerChoice();
 
+    playRound(ComputerChoice, HumanChoice);
+
+    playerScoreDiv.textContent = `Player: ${humanScore}`;
+    computerScoreDiv.textContent = `Computer: ${computerScore}`;
+
+    roundsPlayed++;
+
+    if (roundsPlayed === maxRounds) {
+      if (humanScore > computerScore) {
+        resultDiv.textContent = `Game Over! You won! Final score: Player ${humanScore} - Computer ${computerScore}`;
+      } else if (computerScore > humanScore) {
+        resultDiv.textContent = `Game Over! You lost! Final score: Player ${humanScore} - Computer ${computerScore}`;
+      } else {
+        resultDiv.textContent = `Game Over! It's a tie! Final score: Player ${humanScore} - Computer ${computerScore}`;
+      }
+    }
+  });
+});
